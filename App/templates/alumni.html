@@ -15,23 +15,48 @@
         header {
             background-color: rgb(57, 97, 185);
             color: #fff;
-            padding: 10px 20px;
+            padding: 10px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
         }
 
         .logout{
+            position: relative;
+            margin-left: auto;
             background-color: rgb(57, 97, 185);
             color: #fff;
-            padding: 10px 20px;
+            padding: 10px;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
         }
 
-        .logout:hover{
+        .subscribe{
+            position: absolute;
+            right: 210px;
+            padding: 10px;
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .unsubscribe{
+            position: absolute;
+            right: 90px;
+            padding: 10px;
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .logout:hover, .subscribe:hover, .unsubscribe:hover{
             background-color: rgb(98, 127, 191);
         }
 
@@ -274,7 +299,9 @@
 <body>
     <header>
         <h1>DCIT Job Board</h1>
-        <a href="/logout" class="logout">Logout</a>
+        <button class="subscribe" id="displayPopup">Subscribe</button>
+        <button class="unsubscribe">Unsubscribe</button>
+        <button class="logout">Logout</button>
     </header>
     <div class="container">
         <div id="subpopup" class="popup-container">
@@ -462,53 +489,43 @@
         }
     });
 
-//     document.addEventListener('DOMContentLoaded', () => {
-//     const expandBtns = document.querySelectorAll('.expand-btn');
-
-//     expandBtns.forEach(expandBtn => {
-//         expandBtn.addEventListener('click', () => {
-//             const jobDetails = expandBtn.parentElement.nextElementSibling;
-            
-//             if (jobDetails.style.display === 'none' || jobDetails.style.display === '') {
-//                 jobDetails.style.display = 'block';
-//                 expandBtn.textContent = '▲'; // Change arrow direction
-//             } else {
-//                 jobDetails.style.display = 'none';
-//                 expandBtn.textContent = '▼'; // Change arrow direction
-//             }
-//         });
-//     });
-// });
-
-
-
     document.addEventListener("DOMContentLoaded", function() {
-        const subpopup = document.getElementById("subpopup");
-        const closeButton = document.getElementById("subclose-btn");
-        const subscribeButton = document.getElementById("subscribe-btn");
+            const popupContainer = document.getElementById("subpopup");
+            const closeButton = document.getElementById("subclose-btn");
+            const subscribeButton = document.getElementById("subscribe-btn");
+            const displayPopupButton = document.getElementById("displayPopup");
 
-        function showPopup() {
-            subpopup.style.display = "block";
-        }
-
-        closeButton.addEventListener("click", function() {
-            subpopup.style.display = "none";
-        });
-
-        window.addEventListener("click", function(event) {
-            if (event.target == subpopup) {
-                subpopup.style.display = "none";
+            // Function to show the popup
+            function showPopup() {
+                popupContainer.style.display = "block";
             }
-        });
 
-        subscribeButton.addEventListener("click", function() {
-            const emailInput = document.getElementById("email").value;
-            console.log("Subscribing email:", emailInput);
-            subpopup.style.display = "none";
-        });
+            // Function to hide the popup
+            function hidePopup() {
+                popupContainer.style.display = "none";
+            }
 
-        showPopup();
-    });
+            // Show the popup when the page loads
+            showPopup();
+
+            closeButton.addEventListener("click", hidePopup);
+
+            displayPopupButton.addEventListener("click", showPopup);
+
+            window.addEventListener("click", function(event) {
+                if (event.target === popupContainer) {
+                    hidePopup();
+                }
+            });
+
+            subscribeButton.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent form submission
+                const emailInput = document.getElementById("email").value;
+                const categoryInput = document.getElementById("category").value;
+                console.log("Subscribing email:", emailInput, "Category:", categoryInput);
+                hidePopup();
+            });
+        });
 </script>
 
 </body>
