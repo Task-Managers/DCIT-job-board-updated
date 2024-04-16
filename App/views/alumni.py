@@ -37,11 +37,11 @@ def subscribe_action():
         alumni = subscribe(current_user.alumni_id, data['category'])
         # print(alumni.get_json())
         response = redirect(url_for('index_views.index_page'))
-        flash('subscribed')
+        flash('Subscribed!', 'success')
 
     except Exception:
         # db.session.rollback()
-        flash('Error subscribing')
+        flash('Error subscribing', 'unsuccessful')
         response = redirect(url_for('auth_views.login_page'))
 
     return response
@@ -59,11 +59,11 @@ def unsubscribe_action():
         alumni = unsubscribe(current_user.alumni_id)
         # print(alumni.get_json())
         response = redirect(url_for('index_views.index_page'))
-        flash('unsubscribed!')
+        flash('Unsubscribed!', 'success')
 
     except Exception:
         # db.session.rollback()
-        flash('Error unsubscribing')
+        flash('Error unsubscribing', 'unsuccessful')
         response = redirect(url_for('auth_views.login_page'))
 
     return response

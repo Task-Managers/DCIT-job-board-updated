@@ -41,10 +41,10 @@ def delete_listing_action(job_id):
     response = None
 
     if deleted:
-        flash('Job listing deleted!')
+        flash('Job listing deleted!', 'success')
         response = redirect(url_for('index_views.index_page'))
     else:
-        flash('Error deleting job listing')
+        flash('Error deleting job listing', 'unsuccessful')
         response = (redirect(url_for('index_views.login_page')))
 
     return response

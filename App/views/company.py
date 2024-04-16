@@ -43,7 +43,7 @@ def view_applications_page(job_id):
         return render_template('viewapp-company.html', applicants=applicants)
 
     except Exception:
-        flash('Error receiving applicants')
+        flash('Error receiving applicants', 'unsuccessful')
         response = redirect(url_for('index_views.index_page'))
 
     return response
@@ -81,10 +81,10 @@ def add_listing_action():
         listing = add_listing(data['title'], data['description'], current_user.company_name, data['salary'], data['position_type'],
                               remote, national, data['desired_candidate_type'], data['job_area'], None)
         # print(listing)
-        flash('Created job listing')
+        flash('Created job listing', 'success')
         response = redirect(url_for('index_views.index_page'))
     except Exception:
-        flash('Error creating listing')
+        flash('Error creating listing', 'unsuccessful')
         response = redirect(url_for('company_views.add_listing_page'))
     
     return response
@@ -97,10 +97,10 @@ def request_delete_listing_action(job_id):
     response = None
 
     if listing is not None:
-        flash('Request for deletion sent!')
+        flash('Request for deletion sent!', 'success')
         response = redirect(url_for('index_views.index_page'))
     else:
-        flash('Error sending request')
+        flash('Error sending request', 'unsuccessful')
         response = redirect(url_for('index_views.login_page'))
 
     return response
@@ -114,10 +114,10 @@ def request_edit_listing_action(job_id):
     print(listing.request)
 
     if listing is not None:
-        flash('Request for edit sent!')
+        flash('Request for edit sent!', 'success')
         response = redirect(url_for('index_views.index_page'))
     else:
-        flash('Error sending request')
+        flash('Error sending request', 'unsuccessful')
         response = redirect(url_for('index_views.login_page'))
 
     return response

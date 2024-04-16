@@ -89,14 +89,14 @@ def alumni_signup_action():
 
     response = redirect(url_for('index_views.index_page'))
     set_access_cookies(response, token)
-    flash('Account created!')
+    flash('Account created!', 'success')
 
     # csrf_token = generate_csrf()
     # response.headers["X-CSRF-TOKEN"] = csrf_token
 
   except Exception:  # attempted to insert a duplicate user
     # db.session.rollback()
-    flash("username or email already exists")  # error message
+    flash("username or email already exists", 'unsuccessful')  # error message
     response = redirect(url_for('auth_views.login_page'))
 
   return response
@@ -119,14 +119,14 @@ def company_signup_action():
 
     response = redirect(url_for('index_views.index_page'))
     set_access_cookies(response, token)
-    flash('Account created!')
+    flash('Account created!', 'success')
 
     # csrf_token = generate_csrf()
     # response.headers["X-CSRF-TOKEN"] = csrf_token
 
   except Exception:  # attempted to insert a duplicate user
     # db.session.rollback()
-    flash("username or email already exists")  # error message
+    flash("username or email already exists", 'unsuccessful')  # error message
     response = redirect(url_for('auth_views.login_page'))
 
   return response
@@ -134,7 +134,7 @@ def company_signup_action():
 @auth_views.route('/logout', methods=['GET'])
 def logout_action():
     response = redirect(url_for('auth_views.login_page')) 
-    flash("Logged Out!")
+    flash("Logged Out!", 'success')
     unset_jwt_cookies(response)
     return response
 
