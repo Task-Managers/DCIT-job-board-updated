@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Job Application Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Company Job Application Form</h2>
+        <form action="/add_listing" method="POST">
+            <h3>Job Position Details</h3>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary:</label>
+                <input type="number" id="salary" name="salary" required>
+            </div>
+            <div class="form-group">
+                <label for="position_type">Position Type:</label>
+                <select id="position_type" name="position_type" required>
+                    <option value="">Select Position Type</option>
+                    <option value="Full-time">Full-time</option>
+                    <option value="Part-time">Part-time</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Freelance">Freelance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Remote Options:</label>
+                <input type="checkbox" id="remote_option" name="remote_option" value="Yes">
+                <label for="remote_option">Yes</label>
+            </div>
+            <div class="form-group">
+                <label>Must be a National of TT:</label>
+                <input type="checkbox" id="national_tt" name="national_tt" value="Yes">
+                <label for="national_tt">Yes</label>
+            </div>
+            <div class="form-group">
+                <label for="job_area">Job Area:</label>
+                <input type="text" id="job_area" name="job_area" required>
+            </div>
+            <div class="form-group">
+                <label for="desired_candidate_type">Desired Candidate Type:</label>
+                <input type="text" id="desired_candidate_type" name="desired_candidate_type" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit Application">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

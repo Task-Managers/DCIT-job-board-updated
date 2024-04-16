@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>DCIT Job Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: gainsboro;
+        }
+        header {
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout{
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .logout:hover{
+            background-color: rgb(98, 127, 191);
+        }
+
+        .subpopup-content {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .subscription h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subscription p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .subscription form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .subscription input[type="email"], .subscription select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #subscribe-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #subscribe-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .email-input, .category-input, .subscribe-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fa-envelope, .fa-list, .fa-bell {
+            color: #007bff;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="file"] {
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="file"] {
+            cursor: pointer;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        .search {
+            margin-bottom: 20px;
+        }
+        .search input[type="search"],
+        .search select {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .subpopup-content {
+            background-color: #fff;
+            width: 450px;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            margin-left: 10px;
+            width: 50%;
+            height: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            overflow: auto;
+            position: relative;
+        }
+        .popup-form{
+            position: fixed;
+            top: 0;
+            margin-left: 10px;
+            width: 50%;
+            height: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+        .close-btn {
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            top: 10px;
+            right: 10px;
+            position: absolute;
+        }
+        .hidden {
+            display: none;
+        }
+        
+        .job_card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .job_card:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 20px;
+            padding: 15px;
+            width: 300px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .job-details {
+            display: none; /* Initially hidden */
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DCIT Job Board</h1>
+        <button class="logout">Logout</button>
+    </header>
+    <div class="container">
+        <div id="subpopup" class="popup-container">
+            <div class="subpopup-content">
+                <h2>Wecome Alumni</h2>
+ 
+                <p>Welcome to the DCIT Job Board! Explore our curated job listings directly below. 
+                Whether you're a recent graduate or seasoned professional, find your perfect opportunity here. 
+                Stay updated by subscribing to our mailing list for the latest job postings. Start your journey to career success today!</p>
+                    
+
+                <section class="subscription">
+                    <div class="box">
+                        <h2>Subscribe to Job Alerts</h2>
+                        <p>Get notified about new job opportunities.</p>
+                        <form method="post">
+                            <div class="email-input">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" name="email" id="email" placeholder="Enter your email here" required>
+                            </div>
+                            <div class="category-input">
+                                <i class="fas fa-list"></i>
+                                <select name="category" id="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="SE">Software Engineer</option>
+                                    <option value="DBM">Database Manager</option>
+                                    <option value="CS">Cyber Security</option>
+                                </select>
+                            </div>
+                            <div class="subscribe-btn">
+                                <i class="fas fa-bell"></i>
+                                <button id="subscribe-btn" type="submit">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>                     
+                <span class="close" id="subclose-btn">&times;</span>
+            </div>
+        </div>
+
+        <div class="search">
+            <input type="search" id="serachInput" placeholder="Search any job here">
+            <select class="categories" id="category">
+                <option>--select and option--</option>
+                <option>Web Design</option>
+                <option>Web Development</option>
+                <option>Database Manager</option>
+            </select>
+        </div>
+        {% for job in jobs %}
+        <div class="job_card">
+            <div class="job-header">
+                <header_info>
+                    <h3>{{ job.title }}</h3>
+                    <h4>{{ job.company_name }}</h4>
+                </header_info>
+                <button class="expand-btn">▼</button>
+            </div>
+            <div class="job-details">
+                <p>Description: {{ job.description }}</p>
+                <p>Position Type: {{ job.position }}</p>
+                <p>Remote: {{ job.remote }}</p>
+                <p>Employment Term: {{ job.employmentterm }}</p>
+                <p>Must Be a TT National: {{ job.ttnational }}</p>
+                <p>Category: {{ job.job_category }}</p>
+                <p>Desired Candidate Type: {{ job.desiredcandidate }}</p>
+                <h2>Interested? Click here to <a href="#" class="applyBtn" data-popup-id="form-popup-{{ job.id }}">apply!</a></h2>                
+            </div>
+        </div>
+        <div class="popup-form hidden" id="form-popup-{{ job.id }}">                    
+            <div class="popup-content">
+                        <button class="close-btn" id="closeFormBtn">x</button>
+                        <form action="/submit_application" method="POST">
+
+                            <!-- Add a hidden input field to store the job ID -->
+                            <input type="hidden" name="job_id" value="{{ job.id }}">
+
+                            <div class="form-group">
+                            <label for="full_name">Full Name:</label>
+                            <input type="text" id="full_name" name="full_name" required>
+                        </div>
+                        <div class="form-group" id="form-dropdown">
+                            <label for="experience">Experience:</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Select Experience</option>
+                                <option value="entry">Entry Level</option>
+                                <option value="mid">Mid Level</option>
+                                <option value="senior">Senior Level</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="resume">Resume (PDF):</label>
+                            <input type="file" id="resume" name="resume" accept=".pdf" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cover_letter">Cover Letter (PDF):</label>
+                            <input type="file" id="cover_letter" name="cover_letter" accept=".pdf" required>
+                        </div> -->
+                        <div class="form-group">
+                            <input type="submit" value="Submit Application">
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+        </div>       
+    </div>
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const jobCards = document.querySelectorAll('.job_card');
+    const searchInput = document.getElementById('searchInput');
+    const expandBtns = document.querySelectorAll('.expand-btn');
+    const applyBtns = document.querySelectorAll('.applyBtn'); // Select all apply buttons
+    const closeFormBtns = document.querySelectorAll('.close-btn'); // Select all close buttons
+
+    expandBtns.forEach((expandBtn) => {
+        expandBtn.addEventListener('click', function() {
+            const jobDetails = expandBtn.parentElement.nextElementSibling;
+            toggleJobDetails(jobDetails, expandBtn);
+        });
+    });
+
+    applyBtns.forEach((applyBtn) => {
+        applyBtn.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            const popupId = applyBtn.getAttribute('data-popup-id'); // Get the popup ID from data-popup-id attribute
+            toggleFormPopup(popupId); // Toggle form popup visibility
+        });
+    });
+
+    closeFormBtns.forEach((closeFormBtn) => {
+        closeFormBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const popupId = closeFormBtn.parentElement.parentElement.id; // Get the popup ID from parent element's ID
+            toggleFormPopup(popupId); // Toggle form popup visibility
+        });
+    });
+
+    // Function to toggle job details visibility
+    function toggleJobDetails(jobDetails, expandBtn) {
+        if (jobDetails.style.display === 'none' || jobDetails.style.display === '') {
+            jobDetails.style.display = 'block';
+            expandBtn.textContent = '▲'; // Change arrow direction
+        } else {
+            jobDetails.style.display = 'none';
+            expandBtn.textContent = '▼'; // Change arrow direction
+        }
+    }
+
+    // Function to toggle form popup visibility
+    function toggleFormPopup(popupId) {
+        const formPopup = document.getElementById(popupId);
+        formPopup.classList.toggle('hidden'); // Toggle the 'hidden' class
+    }
+});
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const jobCards = document.querySelectorAll('.job_card');
+        const searchInput = document.getElementById('searchInput');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            filterJobs(searchTerm);
+        });
+
+        function filterJobs(searchTerm) {
+            jobCards.forEach(function(jobCard) {
+                const jobTitle = jobCard.querySelector('.job_details h2').textContent.toLowerCase();
+                if (jobTitle.includes(searchTerm)) {
+                    jobCard.style.display = 'block';
+                } else {
+                    jobCard.style.display = 'none';
+                }
+            });
+        }
+    });
+
+//     document.addEventListener('DOMContentLoaded', () => {
+//     const expandBtns = document.querySelectorAll('.expand-btn');
+
+//     expandBtns.forEach(expandBtn => {
+//         expandBtn.addEventListener('click', () => {
+//             const jobDetails = expandBtn.parentElement.nextElementSibling;
+            
+//             if (jobDetails.style.display === 'none' || jobDetails.style.display === '') {
+//                 jobDetails.style.display = 'block';
+//                 expandBtn.textContent = '▲'; // Change arrow direction
+//             } else {
+//                 jobDetails.style.display = 'none';
+//                 expandBtn.textContent = '▼'; // Change arrow direction
+//             }
+//         });
+//     });
+// });
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const subpopup = document.getElementById("subpopup");
+        const closeButton = document.getElementById("subclose-btn");
+        const subscribeButton = document.getElementById("subscribe-btn");
+
+        function showPopup() {
+            subpopup.style.display = "block";
+        }
+
+        closeButton.addEventListener("click", function() {
+            subpopup.style.display = "none";
+        });
+
+        window.addEventListener("click", function(event) {
+            if (event.target == subpopup) {
+                subpopup.style.display = "none";
+            }
+        });
+
+        subscribeButton.addEventListener("click", function() {
+            const emailInput = document.getElementById("email").value;
+            console.log("Subscribing email:", emailInput);
+            subpopup.style.display = "none";
+        });
+
+        showPopup();
+    });
+</script>
+
+</body>
+</html>
+

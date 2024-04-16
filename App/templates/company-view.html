@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: gainsboro;
+        }
+
+        header {
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        button, a {
+            padding: 10px;
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        button:hover, a:hover {
+            background-color: rgb(98, 127, 191);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .job-listing {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            position: relative;
+        }
+        .job-actions {
+            position: absolute;
+            bottom: 10px; 
+            right: 10px;
+        }
+
+        .logout{
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .addJob {
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            padding: 10px;
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .addjob:hover, .logout:hover {
+            background-color: rgb(98, 127, 191);
+        }
+    </style>
+</head>
+<header>
+    <h2>Job Listings</h2>
+    <a href="/add_listing" class="addJob"> Add Job</a>
+    <a href="/logout" class="logout">Logout</a>
+</header>
+<body>
+    <div class="container">
+        {% for job in jobs %}
+        <div class="job-listing">
+            <h3>{{ job.company }}</h3>
+            <h4>{{ job.title }}</h4>
+            <p>Description: {{ job.description }}</p>
+            <p>Position Type: {{ job.position }}</p>
+            <p>Remote: {{ job.remote }}</p>
+            <!-- <p>Employment Term: {{ job.employment_term }}</p> -->
+            <p>Must Be a TT National: {{ job.ttnational }}</p>
+            <p>Category: {{ job.job_category }}</p>
+            <p>Desired Candidate Type: {{ job.desiredcandidate }}</p>
+            <p>Test for job request: {{ job.request }}</p>
+            <div class="job-actions">
+                    <a href="/view_applications/{{job.id}}">View Applicants</a>
+                    <!-- <input type="hidden" name="job_id" value="{{ job.id }}"> -->
+                    <a href="/request_edit_listing/{{job.id}}">Request Edits</a>
+                    <a href="/request_delete_listing/{{job.id}}">Request Deletion</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicants</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #333;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            border-bottom: 1px solid #333;
+            border-right: 1px solid #333;
+        }
+
+        th, tr{
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .logout{
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button {
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            padding: 10px 20px;
+            background-color: rgb(57, 97, 185);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover, .logout:hover {
+            background-color: rgb(98, 127, 191);
+        }
+    </style>
+</head>
+<header>
+    <h2>Applications</h2>
+    <button class="button"><a href="/app" style="text-decoration: none; color: inherit"> Job Listings</a></button>
+    <button class="logout">Logout</button>
+</header>
+<body>
+    <div class="container">
+        <h2>Applicants</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Contact</th>
+                    <th>Resume</th>
+                    <th>Cover Letter</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for applicant in applicants %}
+                <tr>
+                    <td>{{ applicant.username }}</td>
+                    <td>{{ applicant.firstname }}</td>
+                    <td>{{ applicant.lastname }}</td>
+                    <td>{{ applicant.contact }}</td>
+                    <!-- <td><a href="applicant.resume " target="_blank">Download</a></td>
+                    <td><a href="applicant.cover_letter " target="_blank">Download</a></td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
