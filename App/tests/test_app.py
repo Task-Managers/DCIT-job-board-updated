@@ -108,16 +108,16 @@ class UsersIntegrationTests(unittest.TestCase):
         listing = add_listing('listing1', 'listing1 description', 'company1', '8000', 'Full-time', True, True, 'desiredcandidate', 'curepe')
         assert listing.title == 'listing1' and listing.company_name == 'company1'
 
-    # def test_subscribe(self):
+    def test_czsubscribe(self):
 
-    #     alumni = subscribe_action('123456789')
-    #     assert alumni.subscribed == True
+        alumni = subscribe('123456789', 'Database Manager')
+        assert alumni.subscribed == True
 
-    def test_czadd_categories(self):
+    # def test_czadd_categories(self):
 
-        alumni = add_categories('123456789', ['Database'])
+    #     alumni = add_categories('123456789', ['Database'])
 
-        assert alumni.get_categories() == ['Database']
+    #     assert alumni.get_categories() == ['Database']
 
     def test_czapply_listing(self):
 
@@ -137,7 +137,7 @@ class UsersIntegrationTests(unittest.TestCase):
         self.assertListEqual([
             {"id":1, "username":"bob", 'email':'bob@mail'},
             {"id":2, "username":"rick", 'email':'rick@mail'},
-            {"id":1, "username":"rob", "email":"rob@mail", "alumni_id":123456789, "subscribed":False, "job_category":['Database'], 'contact':'1868-333-4444', 'firstname':'robfname', 'lastname':'roblname'},
+            {"id":1, "username":"rob", "email":"rob@mail", "alumni_id":123456789, "subscribed":True, "job_category":'Database Manager', 'contact':'1868-333-4444', 'firstname':'robfname', 'lastname':'roblname'},
             {"id":1, "company_name":"company1", "email":"company@mail", 'company_address':'company_address','contact':'contact',
             'company_website':'company_website.com'}
             ], users_json)

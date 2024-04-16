@@ -300,8 +300,17 @@
     <header>
         <h1>DCIT Job Board</h1>
         <button class="subscribe" id="displayPopup">Subscribe</button>
-        <button class="unsubscribe">Unsubscribe</button>
-        <button class="logout">Logout</button>
+        <!-- <button class="unsubscribe">
+            Unsubscribe
+        </button> -->
+        <!-- <a href="/unsubscribe" method="['POST']" class="unsubscribe">Unsubscribe</a> -->
+        <form id="unsubscribeForm" action="/unsubscribe" method="POST">
+            <!-- Add any additional hidden input fields if needed -->
+            <button type="submit" class="unsubscribe">Unsubscribe</button>
+        </form>
+        
+        <!-- <button class="logout">Logout</button> -->
+        <a href="/logout" class="logout">Logout</a>
     </header>
     <div class="container">
         <div id="subpopup" class="popup-container">
@@ -317,7 +326,7 @@
                     <div class="box">
                         <h2>Subscribe to Job Alerts</h2>
                         <p>Get notified about new job opportunities.</p>
-                        <form action="/subscribe" method="POST">
+                        <form id="subscription-form" action="/subscribe" method="POST">
                             <!-- <div class="email-input">
                                 <i class="fas fa-envelope"></i>
                                 <input type="email" name="email" id="email" placeholder="Enter your email here" required>
@@ -342,7 +351,7 @@
             </div>
         </div>
 
-        <div class="search">
+        <!-- <div class="search">
             <input type="search" id="serachInput" placeholder="Search any job here">
             <select class="categories" id="category">
                 <option>--select and option--</option>
@@ -350,7 +359,7 @@
                 <option>Web Development</option>
                 <option>Database Manager</option>
             </select>
-        </div>
+        </div> -->
         {% for job in jobs %}
         <div class="job_card">
             <div class="job-header">
@@ -522,6 +531,10 @@
                 event.preventDefault(); // Prevent form submission
                 const emailInput = document.getElementById("email").value;
                 const categoryInput = document.getElementById("category").value;
+
+                const form = document.getElementById("subscription-form");
+                form.submit();
+
                 console.log("Subscribing email:", emailInput, "Category:", categoryInput);
                 hidePopup();
             });

@@ -29,13 +29,13 @@ def subscribe_action():
     data = request.form
     response = None
 
-    print(data)
-    print([data['category']])
-    print(current_user.alumni_id)
+    # print(data)
+    # print([data['category']])
+    # print(current_user.alumni_id)
 
     try:
-        alumni = subscribe(current_user.alumni_id, [data['category']])
-        print(alumni.get_json())
+        alumni = subscribe(current_user.alumni_id, data['category'])
+        # print(alumni.get_json())
         response = redirect(url_for('index_views.index_page'))
         flash('subscribed')
 
@@ -57,7 +57,7 @@ def unsubscribe_action():
 
     try:
         alumni = unsubscribe(current_user.alumni_id)
-        print(alumni.get_json())
+        # print(alumni.get_json())
         response = redirect(url_for('index_views.index_page'))
         flash('unsubscribed!')
 
