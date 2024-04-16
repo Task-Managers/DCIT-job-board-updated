@@ -41,6 +41,7 @@ class Alumni(User):
         self.alumni_id = alumni_id
         # self.job_category = 'N/A'
         self.job_category = None
+        self.subscribed = False
         self.contact = contact
         self.firstname = firstname
         self.lastname = lastname
@@ -70,13 +71,16 @@ class Alumni(User):
     def get_categories(self):
         return self.job_category.split('|') if self.job_category else []
 
+    # def add_category(self, category):
+    #     categories = self.get_categories()
+    #     if category not in categories:
+    #         categories.append(category)
+    #         self.job_category = '|'.join(categories)
+    #     else:
+    #         print(f"Category '{category}' already exists.")
+
     def add_category(self, category):
-        categories = self.get_categories()
-        if category not in categories:
-            categories.append(category)
-            self.job_category = '|'.join(categories)
-        else:
-            print(f"Category '{category}' already exists.")
+        self.job_category = category
 
         # if 'N/A' in categories:
             # print('na in categories')

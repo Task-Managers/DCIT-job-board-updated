@@ -8,8 +8,8 @@ from App.controllers import ( create_user, get_all_users_json, get_all_users, ge
      add_admin, add_alumni, add_company, add_listing, add_categories, remove_categories,
      get_all_companies, get_all_companies_json,
      get_all_alumni, get_all_alumni_json, get_all_listings, get_all_listings_json, get_company_listings, get_all_subscribed_alumni,
-     subscribe_action, is_alumni_subscribed, send_notification, apply_listing, get_all_applicants,
-     get_user_by_username, get_user, get_listing, delete_listing,
+     is_alumni_subscribed, send_notification, apply_listing, get_all_applicants,
+     get_user_by_username, get_user, get_listing, delete_listing, subscribe, unsubscribe,
      login)
 
 # This commands file allow you to create convenient CLI commands for testing controllers
@@ -39,7 +39,7 @@ def initialize():
 
     # add_alumni('rooooob', 'robpass', 'roooooob@mail', '123456089')
 
-    add_categories('123456789', ['Database'])
+    # add_categories('123456789', ['Database'])
     # print('test')
 
     # remove_categories('123456789', ['N/A'])
@@ -47,7 +47,12 @@ def initialize():
     
 
     # subscribe rob
-    subscribe_action('123456789')
+    # subscribe_action('123456789', ['Software Engineer'])
+
+    # subscribe('123456789', ['Database Manager'])
+    # unsubscribe('123456789')
+
+    
 
     # add in companies
     add_company('company1', 'company1', 'compass', 'company@mail',  'company_address', 'contact', 'company_website.com')
@@ -57,10 +62,10 @@ def initialize():
     # listing1 = add_listing('listing1', 'job description', 'company2')
     # print(listing1, 'test')
     add_listing('listing1', 'job description1', 'company1',
-                8000, 'Part-time', True, True, 'desiredCandidate?', 'Curepe', ['Database', 'Programming', 'butt'])
+                8000, 'Part-time', True, True, 'desiredCandidate?', 'Curepe', ['Database Manager', 'Programming', 'butt'])
 
     add_listing('listing2', 'job description', 'company2',
-                4000, 'Full-time', True, True, 'desiredCandidate?', 'Curepe', ['Database', 'Programming', 'butt'])
+                4000, 'Full-time', True, True, 'desiredCandidate?', 'Curepe', ['Database Manager', 'Programming', 'butt'])
 
     
 
@@ -69,7 +74,7 @@ def initialize():
     print(get_company_listings('company2'))
     
 
-    # print(get_all_subscribed_alumni())
+    print(get_all_subscribed_alumni())
     # send_notification(['Programming'])
     # create_user('username', 'password', 'email')
     # print(get_user_by_username('rob'))
