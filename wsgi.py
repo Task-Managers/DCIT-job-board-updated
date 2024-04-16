@@ -49,7 +49,7 @@ def initialize():
     # subscribe rob
     # subscribe_action('123456789', ['Software Engineer'])
 
-    # subscribe('123456789', ['Database Manager'])
+    # subscribe('123456789', 'Database Manager')
     # unsubscribe('123456789')
 
     

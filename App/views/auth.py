@@ -8,7 +8,8 @@ from App.controllers import (
     login_user,
     get_user_by_username,
     get_all_users,
-    add_alumni
+    add_alumni,
+    add_company
 )
 
 
@@ -81,6 +82,36 @@ def alumni_signup_action():
   try:
     newAlumni = add_alumni(data['username'], data['password'], data['email'],
                           data['alumni_id'], data['contact'], data['firstname'], data['lastname'])
+
+    token = login(data['username'], data['password'])
+
+    print(token)
+
+    response = redirect(url_for('index_views.index_page'))
+    set_access_cookies(response, token)
+    flash('Account created!')
+
+    # csrf_token = generate_csrf()
+    # response.headers["X-CSRF-TOKEN"] = csrf_token
+
+  except Exception:  # attempted to insert a duplicate user
+    # db.session.rollback()
+    flash("username or email already exists")  # error message
+    response = redirect(url_for('auth_views.login_page'))
+
+  return response
+
+@auth_views.route('/company-signup', methods=['POST'])
+def company_signup_action():
+  data = request.form
+  
+  response = None
+
+  try:
+    # newAlumni = add_alumni(data['username'], data['password'], data['email'],
+    #                       data['alumni_id'], data['contact'], data['firstname'], data['lastname'])
+    newCompany = add_company(data['username'], data['company_name'], data['password'], data['email'],
+                             data['company_address'], data['contact'], data['company_website'])
 
     token = login(data['username'], data['password'])
 

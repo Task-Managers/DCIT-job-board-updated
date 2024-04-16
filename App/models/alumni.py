@@ -104,7 +104,7 @@ class Alumni(User):
             'email': self.email,
             'alumni_id': self.alumni_id,
             'subscribed': self.subscribed,
-            'job_category': self.get_categories(),
+            'job_category': self.job_category,
             'contact':self.contact,
             'firstname':self.firstname,
             'lastname':self.lastname
