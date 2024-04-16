@@ -92,7 +92,7 @@
     <div class="container">
         {% for job in jobs %}
         <div class="job-listing">
-            <h3>{{ job.company }}</h3>
+            <h3>{{ job.company_name }}</h3>
             <h4>{{ job.title }}</h4>
             <p>Description: {{ job.description }}</p>
             <p>Position Type: {{ job.position }}</p>
@@ -101,7 +101,7 @@
             <p>Must Be a TT National: {{ job.ttnational }}</p>
             <p>Category: {{ job.job_category }}</p>
             <p>Desired Candidate Type: {{ job.desiredcandidate }}</p>
-            <p>Test for job request: {{ job.request }}</p>
+            <!-- <p>Test for job request: {{ job.request }}</p> -->
             <div class="job-actions">
                     <a href="/view_applications/{{job.id}}">View Applicants</a>
                     <!-- <input type="hidden" name="job_id" value="{{ job.id }}"> -->
