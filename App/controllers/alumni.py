@@ -52,20 +52,63 @@ def get_all_subscribed_alumni():
     return all_alumni
 
 # handle subscribing and unsubscribing
-def subscribe_action(alumni_id, job_category=None):
+def subscribe(alumni_id, job_category=None):
     alumni = get_alumni(alumni_id)
+
+    if alumni is None:
+        # print('nah')
+        return None
     
-    # if they are already susbcribed then unsubscribe them
-    if is_alumni_subscribed(alumni_id):
-        alumni.subscribed = False
-    
-    else:
-        alumni.subscribed = True
-        # set their jobs list to job_category ?
+    alumni.subscribed = True
+
+    if job_category is not None:
+        # add_categories(alumni_id, job_category)
+        alumni.add_Category(job_category)
 
     db.session.add(alumni)
     db.session.commit()
     return alumni
+
+def unsubscribe(alumni_id):
+    alumni = get_alumni(alumni_id)
+
+    if not alumni:
+        # print('nah')
+        return None
+
+    alumni.subscribed = False
+    remove_categories(alumni_id, alumni.get_categories())
+
+    db.session.add(alumni)
+    db.session.commit()
+    return alumni
+
+    
+
+
+
+# def subscribe_action(alumni_id, job_category=None):
+#     alumni = get_alumni(alumni_id)
+
+#     if not alumni:
+#         # print('nah')
+#         return None
+    
+#     # if they are already susbcribed then unsubscribe them
+#     if is_alumni_subscribed(alumni_id):
+#         alumni.subscribed = False
+#         remove_categories(alumni_id, alumni.get_categories())
+    
+#     else:
+#         alumni.subscribed = True
+
+#         if job_category is not None:
+#             add_categories(alumni_id, job_category)
+#         # set their jobs list to job_category ?
+
+#     db.session.add(alumni)
+#     db.session.commit()
+#     return alumni
         
 # adding and removing job categories 
 def add_categories(alumni_id, job_categories):

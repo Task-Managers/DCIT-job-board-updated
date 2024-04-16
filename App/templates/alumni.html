@@ -274,7 +274,7 @@
 <body>
     <header>
         <h1>DCIT Job Board</h1>
-        <button class="logout">Logout</button>
+        <a href="/logout" class="logout">Logout</a>
     </header>
     <div class="container">
         <div id="subpopup" class="popup-container">
@@ -290,18 +290,18 @@
                     <div class="box">
                         <h2>Subscribe to Job Alerts</h2>
                         <p>Get notified about new job opportunities.</p>
-                        <form method="post">
-                            <div class="email-input">
+                        <form action="/subscribe" method="POST">
+                            <!-- <div class="email-input">
                                 <i class="fas fa-envelope"></i>
                                 <input type="email" name="email" id="email" placeholder="Enter your email here" required>
-                            </div>
+                            </div> -->
                             <div class="category-input">
                                 <i class="fas fa-list"></i>
                                 <select name="category" id="category" required>
                                     <option value="">Select Category</option>
-                                    <option value="SE">Software Engineer</option>
-                                    <option value="DBM">Database Manager</option>
-                                    <option value="CS">Cyber Security</option>
+                                    <option value="Software Engineer">Software Engineer</option>
+                                    <option value="Database Manager">Database Manager</option>
+                                    <option value="Cyber Security">Cyber Security</option>
                                 </select>
                             </div>
                             <div class="subscribe-btn">

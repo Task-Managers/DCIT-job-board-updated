@@ -6,7 +6,7 @@ from sqlalchemy import CheckConstraint
 
 # categories list for possible job categories
 categories = [
-    'Software Engineering', 'Database', 'Programming', 'Web Design', 'Machine Learning', 
+    'Software Engineer', 'Database Manager', 'Programming', 'Web Design', 'Cyber Security', 
     'Big Data', 'Algorithms', 'N/A']
 
 # Association Table for Alumni and Listings (Many-to-Many)

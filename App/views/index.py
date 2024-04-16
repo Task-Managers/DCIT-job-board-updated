@@ -6,15 +6,12 @@ from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, se
 
 
 from App.controllers import(
-    get_user_by_username,
     get_all_listings,
     get_company_listings,
     add_listing,
     apply_listing,
     add_alumni,
     add_admin,
-    add_categories,
-    subscribe_action,
     add_company,
     get_listing
 )
@@ -175,7 +172,7 @@ def init():
 
     # add_alumni('rooooob', 'robpass', 'roooooob@mail', '123456089')
 
-    add_categories('123456789', ['Database'])
+    # add_categories('123456789', ['Database'])
     # print('test')
 
     # remove_categories('123456789', ['N/A'])
@@ -183,7 +180,7 @@ def init():
     
 
     # subscribe rob
-    subscribe_action('123456789')
+    # subscribe_action('123456789')
 
     # add in companies
     add_company('company1', 'company1', 'compass', 'company@mail',  'company_address', 'contact', 'company_website.com')

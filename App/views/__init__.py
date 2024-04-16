@@ -6,7 +6,8 @@ from .auth import auth_views
 
 from .company import company_views
 from .admin import admin_views
+from .alumni import alumni_views
 
 
-views = [user_views, index_views, auth_views, company_views, admin_views ] 
+views = [user_views, index_views, auth_views, company_views, admin_views, alumni_views ] 
 # blueprints must be added to this list
